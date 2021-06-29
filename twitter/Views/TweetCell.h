@@ -19,8 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *replyButton;
-@property (weak, nonatomic) IBOutlet UILabel *replyCount;
+//@property (weak, nonatomic) IBOutlet UIButton *replyButton;
+//@property (weak, nonatomic) IBOutlet UILabel *replyCount;
 @property (weak, nonatomic) IBOutlet UIButton *rtButton;
 @property (weak, nonatomic) IBOutlet UILabel *rtCount;
 @property (weak, nonatomic) IBOutlet UIButton *favButton;
