@@ -25,8 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *rtCount;
 @property (weak, nonatomic) IBOutlet UIButton *favButton;
 @property (weak, nonatomic) IBOutlet UILabel *favCount;
-@property (weak, nonatomic) IBOutlet UIButton *messageButton;
-
 
 @end
 

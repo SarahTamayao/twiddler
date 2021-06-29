@@ -35,6 +35,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.rowHeight = 150;
+//    self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self loadTweets];
 }
 
@@ -93,6 +94,10 @@
 //    cell.replyCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
     cell.rtCount.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
     cell.favCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
+    
+    // change button colors here?
+    cell.favButton.selected = tweet.favorited;
+    cell.rtButton.selected = tweet.retweeted;
     
     NSString *URLString = tweet.user.profilePicture;
     

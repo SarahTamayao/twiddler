@@ -153,16 +153,6 @@
                                                         <action selector="didTapFav:" destination="6av-UE-QTc" eventType="touchUpInside" id="vkA-ez-HCs"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AeO-D0-VOn">
-                                                    <rect key="frame" x="340" y="132" width="25" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="0VQ-Qz-BFL"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="Ggy-xe-LL2"/>
-                                                        <constraint firstAttribute="height" constant="25" id="NYq-pA-g4A"/>
-                                                        <constraint firstAttribute="width" constant="25" id="o8o-G9-NNk"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button" image="message-icon"/>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="41V-Ef-Wga" secondAttribute="trailing" constant="10" id="6bB-MB-FZY"/>
@@ -175,7 +165,6 @@
                                                 <constraint firstItem="zFG-hm-oXP" firstAttribute="centerY" secondItem="paJ-8e-UKE" secondAttribute="centerY" id="G7w-QZ-WcX"/>
                                                 <constraint firstItem="Hd3-GH-eyE" firstAttribute="centerY" secondItem="paJ-8e-UKE" secondAttribute="centerY" id="H5I-1v-SJx"/>
                                                 <constraint firstItem="F0G-oK-szp" firstAttribute="leading" secondItem="8Y5-XS-N3G" secondAttribute="trailing" id="IOe-h6-EhT"/>
-                                                <constraint firstItem="AeO-D0-VOn" firstAttribute="leading" secondItem="9Ds-aH-ikf" secondAttribute="trailing" constant="25" id="IX7-Mj-VYG"/>
                                                 <constraint firstItem="8Y5-XS-N3G" firstAttribute="centerY" secondItem="paJ-8e-UKE" secondAttribute="centerY" id="KXA-Z0-EhI"/>
                                                 <constraint firstItem="41V-Ef-Wga" firstAttribute="bottom" secondItem="mZU-Zr-NTn" secondAttribute="bottom" id="OyW-Ov-qgM"/>
                                                 <constraint firstAttribute="bottom" secondItem="paJ-8e-UKE" secondAttribute="bottom" constant="8" id="Pbp-B7-YQa"/>
@@ -187,7 +176,6 @@
                                                 <constraint firstItem="0Ke-re-baH" firstAttribute="top" secondItem="Sub-La-fVf" secondAttribute="top" constant="10" id="Z0K-de-OhA"/>
                                                 <constraint firstItem="r5k-VX-Nh7" firstAttribute="leading" secondItem="mZU-Zr-NTn" secondAttribute="trailing" constant="8" id="ar2-Cw-1tu"/>
                                                 <constraint firstItem="Hd3-GH-eyE" firstAttribute="leading" secondItem="paJ-8e-UKE" secondAttribute="trailing" id="bNy-tG-SAW"/>
-                                                <constraint firstItem="AeO-D0-VOn" firstAttribute="centerY" secondItem="9Ds-aH-ikf" secondAttribute="centerY" id="e6j-n2-N4c"/>
                                                 <constraint firstItem="zFG-hm-oXP" firstAttribute="leading" secondItem="F0G-oK-szp" secondAttribute="trailing" constant="25" id="h9T-C0-oPt"/>
                                                 <constraint firstItem="7TS-f9-nWZ" firstAttribute="leading" secondItem="0Ke-re-baH" secondAttribute="trailing" constant="10" id="kFM-5J-MYw"/>
                                                 <constraint firstItem="paJ-8e-UKE" firstAttribute="leading" secondItem="mZU-Zr-NTn" secondAttribute="leading" id="ngJ-n4-jUT"/>
@@ -198,7 +186,6 @@
                                             <outlet property="dateLabel" destination="41V-Ef-Wga" id="dk3-Mk-oVL"/>
                                             <outlet property="favButton" destination="zFG-hm-oXP" id="dY4-HI-Yw6"/>
                                             <outlet property="favCount" destination="9Ds-aH-ikf" id="Mww-ti-pFe"/>
-                                            <outlet property="messageButton" destination="AeO-D0-VOn" id="NEK-II-xh1"/>
                                             <outlet property="nameLabel" destination="mZU-Zr-NTn" id="QYP-xY-1Js"/>
                                             <outlet property="profilePic" destination="0Ke-re-baH" id="Rlg-fP-6Mo"/>
                                             <outlet property="replyButton" destination="paJ-8e-UKE" id="vWJ-Wp-MhT"/>
@@ -222,7 +209,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home Timeline" id="CpS-E6-GLr">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="ySg-eP-EcO">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" image="person.crop.circle.badge.xmark" catalog="system" id="ySg-eP-EcO">
                             <connections>
                                 <action selector="onLogout:" destination="Lbl-k5-U4i" id="OVc-JV-UNT"/>
                             </connections>
@@ -249,21 +236,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xpR-Nc-XiK">
-                                <rect key="frame" x="0.0" y="88" width="414" height="192"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's happening?" translatesAutoresizingMaskIntoConstraints="NO" id="xpR-Nc-XiK">
+                                <rect key="frame" x="30" y="86" width="354" height="180"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="D20-oV-wlc"/>
+                                </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mMy-H3-kyd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mMy-H3-kyd" firstAttribute="trailing" secondItem="xpR-Nc-XiK" secondAttribute="trailing" constant="30" id="3E1-GB-fgi"/>
+                            <constraint firstItem="xpR-Nc-XiK" firstAttribute="leading" secondItem="mMy-H3-kyd" secondAttribute="leading" constant="30" id="bpK-hr-BOO"/>
+                            <constraint firstItem="xpR-Nc-XiK" firstAttribute="top" secondItem="mMy-H3-kyd" secondAttribute="top" constant="30" id="lNn-jL-W0i"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VNF-aM-tZq">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="close-icon" id="VU3-dL-00Q">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="trash" catalog="system" id="VU3-dL-00Q">
                             <connections>
                                 <action selector="onClose:" destination="Unj-Z8-Tzz" id="fxi-hz-y5b"/>
                             </connections>
@@ -321,17 +314,20 @@
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>
-        <image name="close-icon" width="26" height="24"/>
         <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
-        <image name="message-icon" width="30" height="30"/>
+        <image name="person.crop.circle.badge.xmark" catalog="system" width="128" height="113"/>
         <image name="reply-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
