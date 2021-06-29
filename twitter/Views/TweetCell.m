@@ -29,7 +29,7 @@
     // Configure the view for the selected state
 }
 
-- (void)refreshData {
+- (void)refreshData { //updates cell UI (not any internal tweet info, that should already be changed)
     self.favCount.text = [NSString stringWithFormat:@"%i", self.tweet.favoriteCount];
     self.rtCount.text = [NSString stringWithFormat:@"%i", self.tweet.retweetCount];
 }
@@ -62,6 +62,35 @@
         }];
     }
     // Update cell UI
+    [self refreshData];
+}
+
+- (IBAction)didTapRetweet:(id)sender {
+    // check if it's already retweeted
+    if (self.tweet.retweeted) { // unretweet it
+        self.tweet.retweeted = false;
+        self.tweet.retweetCount -= 1;
+        self.rtButton.selected = false;
+        [[APIManager shared] unretweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
+            if(error){
+                NSLog(@"Error unretweeting: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Unretweeted: %@", tweet.text);
+            }
+        }];
+    } else { // retweet it
+        // update locally
+        self.tweet.retweeted = true;
+        self.tweet.retweetCount += 1;
+        self.rtButton.selected = true;
+        [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
+            if(error){
+                NSLog(@"Error retweeting: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Retweeted: %@", tweet.text);
+            }
+        }];
+    }
     [self refreshData];
 }
 
