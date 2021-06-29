@@ -13,20 +13,22 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    [self configButtons];
+    [self refreshData];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    // Configure the view for the selected state
+}
+
+- (void)configButtons {
     // Initialization code to config default and selected button states
     [self.favButton setImage:[UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
     [self.favButton setImage:[UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateSelected];
     
     [self.rtButton setImage:[UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
     [self.rtButton setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
-    
-    [self refreshData];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)refreshData { //updates cell UI (not any internal tweet info, that should already be changed)
@@ -35,7 +37,6 @@
 }
 
 - (IBAction)didTapFav:(id)sender {
-    // check if it's already favorited
     if (self.tweet.favorited) { // already fav'd, now unfav it
         self.tweet.favorited = false;
         self.tweet.favoriteCount -= 1;
@@ -66,7 +67,6 @@
 }
 
 - (IBAction)didTapRetweet:(id)sender {
-    // check if it's already retweeted
     if (self.tweet.retweeted) { // unretweet it
         self.tweet.retweeted = false;
         self.tweet.retweetCount -= 1;

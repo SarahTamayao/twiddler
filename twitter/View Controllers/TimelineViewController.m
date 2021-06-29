@@ -26,17 +26,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // refresh control
+    [self setupView];
+    [self loadTweets];
+}
+
+- (void)setupView { // refresh control and tableView
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    // self.tableView.rowHeight = 150;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    [self loadTweets];
 }
 
 - (void)loadTweets {
@@ -47,10 +48,6 @@
             self.arrayOfTweets = tweets;
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
-//            for (NSDictionary *dictionary in tweets) {
-//                NSString *text = dictionary[@"text"];
-//                NSLog(@"%@", text);
-//            }
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
@@ -91,7 +88,6 @@
     cell.usernameLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
     cell.dateLabel.text = tweet.createdAtString;
     cell.tweetLabel.text = tweet.text;
-//    cell.replyCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
     cell.rtCount.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
     cell.favCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
     

@@ -11,6 +11,7 @@
 
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
+@property (weak, nonatomic) IBOutlet UILabel *charCountLabel;
 
 @end
 
@@ -20,6 +21,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+
+// TODO: count chars while typing, turn label red when it's negative etc.
 
 - (IBAction)onClose:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
