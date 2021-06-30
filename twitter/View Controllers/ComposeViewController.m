@@ -9,7 +9,7 @@
 #import "ComposeViewController.h"
 #import "APIManager.h"
 
-@interface ComposeViewController ()
+@interface ComposeViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
 @property (weak, nonatomic) IBOutlet UILabel *charCountLabel;
 
@@ -20,9 +20,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tweetTextView.delegate = self;
+    self.tweetTextView.text = @"What's happening?";
+    self.tweetTextView.textColor = [UIColor lightGrayColor];
+    self.charCountLabel.text = @"280";
 }
 
-// TODO: count chars while typing, turn label red when it's negative etc.
+// below 2 methods control placeholder text in UITextView
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:@"What's happening?"]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor];
+    }
+    [textView becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = @"What's happening?";
+        textView.textColor = [UIColor lightGrayColor];
+    }
+    [textView becomeFirstResponder];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    // count chars while typing, turn label red when it's negative etc.
+    NSInteger tweetLen = [self.tweetTextView.text length];
+    NSInteger charsLeft = 280 - tweetLen;
+    if (charsLeft < 0) { // no more chars left
+        self.charCountLabel.textColor = [UIColor redColor];
+    } else {
+        self.charCountLabel.textColor = [UIColor blackColor];
+    }
+    self.charCountLabel.text = [NSString stringWithFormat:@"%li", charsLeft];
+}
+
+- (IBAction)onTap:(id)sender { // why isnt this working bruh
+    [self.view endEditing:true];
+}
 
 - (IBAction)onClose:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];

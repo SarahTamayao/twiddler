@@ -7,13 +7,15 @@
 //
 
 #import "TimelineViewController.h"
+#import "LoginViewController.h"
+#import "ComposeViewController.h"
+#import "DetailsViewController.h"
 #import "APIManager.h"
 #import "AppDelegate.h"
-#import "LoginViewController.h"
-#import "TweetCell.h"
 #import "Tweet.h"
+#import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
-#import "ComposeViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -31,6 +33,8 @@
 }
 
 - (void)setupView { // refresh control and tableView
+//    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TwitterLogoBlue"]];
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
@@ -101,6 +105,7 @@
     NSURL *url = [NSURL URLWithString:imUrl];
 //    NSData *urlData = [NSData dataWithContentsOfURL:url];
     [cell.profilePic setImageWithURL:url];
+    cell.profilePic.layer.cornerRadius = 40;
     
     return cell;
 }
@@ -111,11 +116,23 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
+    
+    // determine which destination controller to send it to
+    NSString *segId = [segue identifier];
+    NSLog(@"segue identifier: %@", segId);
+    if ([segId isEqualToString:@"compose"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    } else if ([segId isEqualToString:@"details"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Tweet *tweet = self.arrayOfTweets[indexPath.row];
+        DetailsViewController *detailsViewController = [segue destinationViewController];
+        detailsViewController.tweet = tweet;
+    } else {
+        NSLog(@"SEGUE NOT RECOGNIZED");
+    }
 }
-
-
 
 @end
