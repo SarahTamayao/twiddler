@@ -38,7 +38,7 @@
         textView.text = @"";
         textView.textColor = [UIColor blackColor];
     }
-    [textView becomeFirstResponder];
+//    [textView becomeFirstResponder];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
@@ -46,7 +46,7 @@
         textView.text = @"What's happening?";
         textView.textColor = [UIColor lightGrayColor];
     }
-    [textView becomeFirstResponder];
+//    [textView becomeFirstResponder];
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
@@ -61,7 +61,7 @@
     self.charCountLabel.text = [NSString stringWithFormat:@"%li", charsLeft];
 }
 
-- (IBAction)onTap:(id)sender { // why isnt this working bruh
+- (IBAction)onTap:(id)sender {
     [self.view endEditing:true];
 }
 
@@ -70,20 +70,31 @@
 }
 
 - (IBAction)postTweet:(id)sender {
-    NSString *statusId = nil;
-    if (self.inReplyToTweet) {
-        statusId = self.inReplyToTweet.idStr;
-    }
-    [[APIManager shared] postStatusWithText:self.tweetTextView.text replyTo:statusId completion:^(Tweet *tweet, NSError *error) {
-        if (error) {
-            NSLog(@"Error posting tweet: %@", error.localizedDescription);
-        } else {
-            NSLog(@"Tweeted successfully!");
-            [self.delegate didTweet:tweet];
-            // dismiss modal
-            [self dismissViewControllerAnimated:true completion:nil];
+    // first see if tweet is valid in terms of char length
+    if ([self.tweetTextView.text length] > 280) { // invalid tweet
+        NSLog(@"Tweet too long!");
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot post tweet" message:@"Tweet is above the 280-character limit." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            // do nothing, dismiss alert
+        }];
+        [alert addAction:dismissAction];
+        [self presentViewController:alert animated:YES completion:^{}];
+    } else { // valid tweet
+        NSString *statusId = nil;
+        if (self.inReplyToTweet) {
+            statusId = self.inReplyToTweet.idStr;
         }
-    }];
+        [[APIManager shared] postStatusWithText:self.tweetTextView.text replyTo:statusId completion:^(Tweet *tweet, NSError *error) {
+            if (error) {
+                NSLog(@"Error posting tweet: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Tweeted successfully!");
+                [self.delegate didTweet:tweet];
+                // dismiss modal
+                [self dismissViewControllerAnimated:true completion:nil];
+            }
+        }];
+    }
 }
 
 /*
