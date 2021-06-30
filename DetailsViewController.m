@@ -17,7 +17,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
+@property (weak, nonatomic) IBOutlet UITextView *tweetLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *rtCount;
@@ -50,6 +52,9 @@
     self.nameLabel.text = self.tweet.user.name;
     self.usernameLabel.text = [@"@" stringByAppendingString:self.tweet.user.screenName];
     self.tweetLabel.text = self.tweet.text;
+    [self.tweetLabel setTextContainerInset:UIEdgeInsetsZero];
+    self.tweetLabel.textContainer.lineFragmentPadding = 0;
+
     self.dateLabel.text = self.tweet.createdAtStringLong;
 
     self.favButton.selected = self.tweet.favorited;

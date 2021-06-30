@@ -27,7 +27,7 @@ The following **optional** features are implemented:
   - Contains a section with the users basic stats: # tweets, # following, # followers
   - [ ] Profile view should include that user's timeline
 - [x] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count. Refer to [[this guide|unretweeting]] for help on implementing unretweeting.
-- [ ] Links in tweets are clickable.
+- [x] \*Links in tweets are clickable. Yes, but only in the details view. I had to replace the UILabel with a UITextView, which meant that I had to redo all the Auto Layout constraints. I didn't bother doing this again on the timeline screen because the tweet cells there had more complex constraints that I had already set up. In the future, if I know I want the text block to recognize links, I will construct it with a UITextView from the start to avoid resetting all the constraints.
 - [ ] User can tap the profile image in any tweet to see another user's profile
   - Contains the user header view: picture and tagline
   - Contains a section with the users basic stats: # tweets, # following, # followers
