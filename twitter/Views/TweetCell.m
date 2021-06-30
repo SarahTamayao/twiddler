@@ -31,6 +31,10 @@
     [self.rtButton setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
 }
 
+- (void)setTweet {
+    // TODO: REFACTOR DISPLAY FROM TIMELINE VC
+}
+
 - (void)refreshData { //updates cell UI (not any internal tweet info, that should already be changed)
     self.favCount.text = [NSString stringWithFormat:@"%i", self.tweet.favoriteCount];
     self.rtCount.text = [NSString stringWithFormat:@"%i", self.tweet.retweetCount];

@@ -82,6 +82,7 @@
     return self.arrayOfTweets.count;
 }
 
+// TODO: SEPARATE THIS LOGIC FROM THIS CLASS
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
     Tweet *tweet = self.arrayOfTweets[indexPath.row];

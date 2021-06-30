@@ -44,9 +44,9 @@
         NSDate *date = [formatter dateFromString:createdAtOriginalString];
         // config output format
         formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterNoStyle;
+        formatter.timeStyle = NSDateFormatterShortStyle;
         // convert date to string
-//        self.createdAtString = [formatter stringFromDate:date];
+        self.createdAtStringLong = [[formatter stringFromDate:date] stringByReplacingOccurrencesOfString:@", " withString:@" \u2022 "];
         self.createdAtString = [date shortTimeAgoSinceNow];
     }
     return self;
