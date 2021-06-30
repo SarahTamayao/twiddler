@@ -66,9 +66,13 @@ static NSString * const baseURLString = @"https://api.twitter.com";
     }];
 }
 
-- (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion {
+- (void)postStatusWithText:(NSString *)text replyTo:(NSString *)statusId completion:(void (^)(Tweet *, NSError *))completion {
     NSString *urlString = @"1.1/statuses/update.json";
-    NSDictionary *parameters = @{@"status": text};
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity:2];
+    [parameters setObject:text forKey:@"status"];
+    if (statusId) {
+        [parameters setObject:statusId forKey:@"in_reply_to_status_id"];
+    }
     
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable tweetDictionary) {
         Tweet *tweet = [[Tweet alloc] initWithDictionary:tweetDictionary];

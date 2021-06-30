@@ -7,11 +7,12 @@
 //
 
 #import "DetailsViewController.h"
+#import "ComposeViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
 #import "Tweet.h"
 
-@interface DetailsViewController ()
+@interface DetailsViewController () <ComposeViewControllerDelegate>
 // public: @property (nonatomic, strong) Tweet *tweet;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -66,6 +67,10 @@
 - (void)refreshData { //updates cell UI (not any internal tweet info, that should already be changed)
     self.favCount.text = [NSString stringWithFormat:@"%i", self.tweet.favoriteCount];
     self.rtCount.text = [NSString stringWithFormat:@"%i", self.tweet.retweetCount];
+}
+
+- (void)didTweet:(Tweet *)tweet {
+    [self refreshData];
 }
 
 - (IBAction)didTapFav:(id)sender {
@@ -126,15 +131,21 @@
     [self refreshData];
 }
 
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    NSString *segId = [segue identifier];
+    NSLog(@"segue identifier: %@", segId);
+    if([segId isEqualToString:@"composeReply"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController *)navigationController.topViewController;
+        composeController.delegate = self;
+        composeController.inReplyToTweet = self.tweet;
+    }
 }
-*/
+
 
 @end

@@ -21,9 +21,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tweetTextView.delegate = self;
-    self.tweetTextView.text = @"What's happening?";
-    self.tweetTextView.textColor = [UIColor lightGrayColor];
-    self.charCountLabel.text = @"280";
+    if (self.inReplyToTweet) { // new tweet is a reply
+        self.tweetTextView.text = [@"@" stringByAppendingString:self.inReplyToTweet.user.screenName];
+        self.tweetTextView.textColor = [UIColor blackColor];
+        // TODO: what happens to charcount label in reply tweet??
+    } else {
+        self.tweetTextView.text = @"What's happening?";
+        self.tweetTextView.textColor = [UIColor lightGrayColor];
+        self.charCountLabel.text = @"280";
+    }
 }
 
 // below 2 methods control placeholder text in UITextView
@@ -64,7 +70,11 @@
 }
 
 - (IBAction)postTweet:(id)sender {
-    [[APIManager shared] postStatusWithText:self.tweetTextView.text completion:^(Tweet *tweet, NSError *error) {
+    NSString *statusId = nil;
+    if (self.inReplyToTweet) {
+        statusId = self.inReplyToTweet.idStr;
+    }
+    [[APIManager shared] postStatusWithText:self.tweetTextView.text replyTo:statusId completion:^(Tweet *tweet, NSError *error) {
         if (error) {
             NSLog(@"Error posting tweet: %@", error.localizedDescription);
         } else {
