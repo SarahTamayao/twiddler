@@ -36,7 +36,7 @@ The following **optional** features are implemented:
 - [x] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [x] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet (**2 points**)
 - [ ] User sees embedded images in tweet if available
-- [ ] User can switch between timeline, mentions, or profile view through a tab bar (**3 points**)
+- [ ] \*User can switch between timeline, mentions, or profile view through a tab bar (**3 points**) I did implement a tab bar as seen in the 2nd gif below, but only the timeline tab is functional. 
 - [ ] Profile Page: pulling down the profile page should blur and resize the header image. (**4 points**)
 
 
@@ -47,6 +47,7 @@ The following **additional** features are implemented:
   - [x] Gray placeholder text when composing tweet that disappears when you start typing; tap to dismiss keyboard
   - [x] Character countdown turns red when you're over the limit
   - [x] Tweet timestamp in details view formatted with a little dot like in the Twitter app
+- [x] User is asked to confirm logout after pressing the logout button.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
@@ -57,13 +58,13 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories. The gifs showcase, in order:
 1. Main walkthrough: All the required user stories besides login and autolayout, as well as untweeting & unfavoriting, tweets showing up without reload, infinite loading, tweet reply, and UI improvements.
-2. Login
+2. Login and logout, which is accompanied by a confirmation alert to prevent accidental logout.
 3. Clickable links in details view
 4. Visual cues and alert when user tries to post a tweet that's too long
 5. Autolayout demonstration, recorded on a real iPhone 12 Pro, which is why the phone borders are not visible (and there seems to be more whitespace on the left and right).
 
 ![twiddler_main](https://user-images.githubusercontent.com/43052066/124192858-f7f4df00-da93-11eb-93ca-4345c5abf075.gif)
-![twiddler_login](https://user-images.githubusercontent.com/43052066/124192866-faefcf80-da93-11eb-8de8-6c046580ff39.gif)
+![twiddler_loginlogout](https://user-images.githubusercontent.com/43052066/124195869-3e007180-da99-11eb-9d7e-607eb0c2b538.gif)
 ![twiddler_links](https://user-images.githubusercontent.com/43052066/124192877-fe835680-da93-11eb-8713-838aadb9c482.gif)
 ![twiddler_overload](https://user-images.githubusercontent.com/43052066/124192882-004d1a00-da94-11eb-878c-cb480dc9b09b.gif)
 ![twiddler_autorotate](https://user-images.githubusercontent.com/43052066/124193956-b7966080-da95-11eb-8116-933121cd5585.gif)
