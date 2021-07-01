@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "Tweet.h"
 #import "TweetCell.h"
+#import "InfiniteScrollActivityView.h"
 #import "UIImageView+AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -21,7 +22,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *arrayOfTweets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (assign, nonatomic) BOOL isMoreDataLoading;
+//@property (assign, nonatomic) BOOL isMoreDataLoading;
+@property (nonatomic, strong) InfiniteScrollActivityView *loadingMoreView;
 
 @end
 
@@ -40,6 +42,16 @@
     [self.refreshControl addTarget:self action:@selector(loadTweets) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
+    // Set up Infinite Scroll loading indicator
+    CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    self.loadingMoreView.hidden = true;
+    [self.tableView addSubview:self.loadingMoreView];
+    
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self.tableView.contentInset = insets;
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -47,7 +59,8 @@
 
 - (void)loadTweets {
     // Get timeline
-    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+    NSInteger count = 20;
+    [[APIManager shared] getHomeTimelineWithNum:count completion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             self.arrayOfTweets = tweets;
@@ -57,6 +70,16 @@
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
     }];
+//    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+//        if (tweets) {
+//            NSLog(@"😎😎😎 Successfully loaded home timeline");
+//            self.arrayOfTweets = tweets;
+//            [self.tableView reloadData];
+//            [self.refreshControl endRefreshing];
+//        } else {
+//            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+//        }
+//    }];
 }
 
 - (void)didTweet:(Tweet *)tweet {
@@ -83,57 +106,56 @@
     return self.arrayOfTweets.count;
 }
 
-// TODO: SEPARATE THIS LOGIC FROM THIS CLASS
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
-    Tweet *tweet = self.arrayOfTweets[indexPath.row];
-    cell.tweet = tweet;
-    
-    // set outlets of tweetcell object
-    cell.nameLabel.text = tweet.user.name;
-    cell.usernameLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
-    cell.dateLabel.text = tweet.createdAtString;
-    cell.tweetLabel.text = tweet.text;
-    cell.rtCount.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
-    cell.favCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
-    
-    // change button colors here?
-    cell.favButton.selected = tweet.favorited;
-    cell.rtButton.selected = tweet.retweeted;
-    
-    NSString *URLString = tweet.user.profilePicture;
-    
-    NSString *imUrl = [URLString stringByReplacingOccurrencesOfString:@"_normal" withString:@""];
-    NSURL *url = [NSURL URLWithString:imUrl];
-//    NSData *urlData = [NSData dataWithContentsOfURL:url];
-    [cell.profilePic setImageWithURL:url];
-    cell.profilePic.layer.cornerRadius = 40;
+    cell.tweet = self.arrayOfTweets[indexPath.row];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row + 1 == self.arrayOfTweets.count) {
-//        [self loadMoreData:self.arrayOfTweets.count+20];
+        // Update position of loadingMoreView, and start loading indicator
+        CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+        self.loadingMoreView.frame = frame;
+        [self.loadingMoreView startAnimating];
+        [self loadMoreData:self.arrayOfTweets.count+20];
     }
 }
 
+/* ALTERNATE WAY OF IMPLEMENTING INFINITE SCROLL
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (!self.isMoreDataLoading) {
         // Calculate the position of one screen length before the bottom of the results
         int scrollViewContentHeight = self.tableView.contentSize.height;
         int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
-        
+
         // when user has scrolled past threshold, start requesting
         if (scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
             self.isMoreDataLoading = true;
-            [self loadMoreData];
+            // Update position of loadingMoreView, and start loading indicator
+            CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+            self.loadingMoreView.frame = frame;
+            [self.loadingMoreView startAnimating];
+
+            [self loadMoreData:self.arrayOfTweets.count+20];
         }
     }
 }
+ */
 
-- (void)loadMoreData {
-    
+- (void)loadMoreData:(NSInteger)numTweets {
+    [[APIManager shared] getHomeTimelineWithNum:numTweets completion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded more tweets");
+            self.arrayOfTweets = tweets;
+//            self.isMoreDataLoading = false;
+            [self.loadingMoreView stopAnimating];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"😫😫😫 Error getting more tweets: %@", error.localizedDescription);
+        }
+    }];
 }
 
 #pragma mark - Navigation

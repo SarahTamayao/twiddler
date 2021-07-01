@@ -31,7 +31,7 @@ The following **optional** features are implemented:
 - [ ] User can tap the profile image in any tweet to see another user's profile
   - Contains the user header view: picture and tagline
   - Contains a section with the users basic stats: # tweets, # following, # followers
-- [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
+- [x] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client. 
 - [x] When composing, you should have a countdown for the number of characters remaining for the tweet (out of 280) (**1 point**)
 - [x] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [x] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet (**2 points**)
@@ -44,7 +44,7 @@ The following **additional** features are implemented:
 
 - [x] UI improvements! 
   - [x] Round profile pictures
-  - [x] Gray placeholder text when composing tweet that disappears when you start typing
+  - [x] Gray placeholder text when composing tweet that disappears when you start typing; tap to dismiss keyboard
   - [x] Character countdown turns red when you're over the limit
   - [x] Tweet timestamp in details view formatted with a little dot like in the Twitter app
 

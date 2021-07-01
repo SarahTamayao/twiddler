@@ -14,7 +14,7 @@
 
 + (instancetype)shared;
 
-- (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion;
+- (void)getHomeTimelineWithNum:(NSInteger)numTweets completion:(void(^)(NSArray *tweets, NSError *error))completion;
 
 - (void)postStatusWithText:(NSString *)text replyTo:(NSString *)statusId completion:(void (^)(Tweet *, NSError *))completion;
 

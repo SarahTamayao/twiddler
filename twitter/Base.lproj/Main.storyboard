@@ -54,7 +54,7 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
         </scene>
-        <!--Timeline-->
+        <!--Home-->
         <scene sceneID="1Tv-nE-1AW">
             <objects>
                 <viewController storyboardIdentifier="TimelineViewController" id="Lbl-k5-U4i" customClass="TimelineViewController" sceneMemberID="viewController">
@@ -192,7 +192,7 @@
                             <constraint firstAttribute="bottom" secondItem="BCy-IY-Ts2" secondAttribute="bottom" id="dlW-uL-ZbH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Timeline" id="CpS-E6-GLr">
+                    <navigationItem key="navigationItem" title="Home" id="CpS-E6-GLr">
                         <barButtonItem key="leftBarButtonItem" title="Logout" image="person.crop.circle.badge.xmark" catalog="system" id="ySg-eP-EcO">
                             <connections>
                                 <action selector="onLogout:" destination="Lbl-k5-U4i" id="OVc-JV-UNT"/>
@@ -543,7 +543,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="abA-n2-due"/>
+        <segue reference="Dkm-ve-HTn"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>

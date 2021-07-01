@@ -8,6 +8,7 @@
 #import "TweetCell.h"
 #import "Tweet.h"
 #import "APIManager.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation TweetCell
 
@@ -31,8 +32,27 @@
     [self.rtButton setImage:[UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateSelected];
 }
 
-- (void)setTweet {
-    // TODO: REFACTOR DISPLAY FROM TIMELINE VC
+- (void)setTweet:(Tweet *)tweet { // custom setter
+    _tweet = tweet;
+    
+    // set outlets of tweetcell object
+    self.nameLabel.text = tweet.user.name;
+    self.usernameLabel.text = [@"@" stringByAppendingString:tweet.user.screenName];
+    self.dateLabel.text = tweet.createdAtString;
+    self.tweetLabel.text = tweet.text;
+    self.rtCount.text = [NSString stringWithFormat:@"%i", tweet.retweetCount];
+    self.favCount.text = [NSString stringWithFormat:@"%i", tweet.favoriteCount];
+    
+    // change button colors here?
+    self.favButton.selected = tweet.favorited;
+    self.rtButton.selected = tweet.retweeted;
+    
+    NSString *URLString = tweet.user.profilePicture;
+    
+    NSString *imUrl = [URLString stringByReplacingOccurrencesOfString:@"_normal" withString:@""];
+    NSURL *url = [NSURL URLWithString:imUrl];
+    [self.profilePic setImageWithURL:url];
+    self.profilePic.layer.cornerRadius = 40;
 }
 
 - (void)refreshData { //updates cell UI (not any internal tweet info, that should already be changed)
