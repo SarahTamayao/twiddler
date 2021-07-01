@@ -70,16 +70,6 @@
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
     }];
-//    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
-//        if (tweets) {
-//            NSLog(@"😎😎😎 Successfully loaded home timeline");
-//            self.arrayOfTweets = tweets;
-//            [self.tableView reloadData];
-//            [self.refreshControl endRefreshing];
-//        } else {
-//            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
-//        }
-//    }];
 }
 
 - (void)didTweet:(Tweet *)tweet {
