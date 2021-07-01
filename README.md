@@ -2,7 +2,7 @@
 
 **Twiddler** is a basic iOS app to read and compose tweets using the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: **20** hours spent in total
 
 ## User Stories
 
@@ -50,12 +50,23 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. It was hard for me to tell whether the GET/POST requests made for this app were syntax-specific in some ways to the Twitter API. It would be great to get more practice sending such requests to various other APIs.
+2. Retweets from accounts I follow show up in my timeline. It would be nice to add the little gray tag at the top, as Twitter does, to indicate which account retweeted it. The method to do this wasn't obvious to me, so I didn't go down that road—I assume I would have to look more carefully at the Twitter API docs.
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+Here's a walkthrough of implemented user stories. The gifs showcase, in order:
+1. Main walkthrough: All the required user stories besides login and autolayout, as well as untweeting & unfavoriting, tweets showing up without reload, infinite loading, tweet reply, and UI improvements.
+2. Login
+3. Clickable links in details view
+4. Visual cues and alert when user tries to post a tweet that's too long
+5. Autolayout demonstration, recorded on a real iPhone 12 Pro, which is why the phone borders are not visible (and there seems to be more whitespace on the left and right).
+
+![twiddler_main](https://user-images.githubusercontent.com/43052066/124192858-f7f4df00-da93-11eb-93ca-4345c5abf075.gif)
+![twiddler_login](https://user-images.githubusercontent.com/43052066/124192866-faefcf80-da93-11eb-8de8-6c046580ff39.gif)
+![twiddler_links](https://user-images.githubusercontent.com/43052066/124192877-fe835680-da93-11eb-8713-838aadb9c482.gif)
+![twiddler_overload](https://user-images.githubusercontent.com/43052066/124192882-004d1a00-da94-11eb-878c-cb480dc9b09b.gif)
+![twiddler_autorotate](https://user-images.githubusercontent.com/43052066/124193956-b7966080-da95-11eb-8116-933121cd5585.gif)
 
 ## Notes
 
