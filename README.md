@@ -8,17 +8,16 @@ Time spent: **20** hours spent in total
 
 The following **required** functionality is completed:
 
-- [x] User sees app icon in home screen and styled launch screen
-- [x] User can sign in using OAuth login flow
-- [x] User can Logout
-- [x] User can view last 20 tweets from their home timeline
-- [x] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.
-- [x] User can pull to refresh.
-- [x] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet.
-- [x] User can compose a new tweet by tapping on a compose button.
-- [x] Using AutoLayout, the Tweet cell should adjust its layout for iPhone 11, Pro and SE device sizes as well as accommodate device rotation.
-- [x] User should display the relative timestamp for each tweet "8m", "7h"
-- [x] Tweet Details Page: User can tap on a tweet to view it, with controls to retweet and favorite.
+- [x] See an app icon in the home screen and a styled launch screen
+- [x] Be able to log in using their Twitter account
+- [x] See at latest the latest 20 tweets for a Twitter account in a Table View
+- [x] Be able to refresh data by pulling down on the Table View
+- [x] Be able to like and retweet from their Timeline view
+- [x] Only be able to access content if logged in
+- [x] Each tweet should display user profile picture, username, screen name, tweet text, timestamp, as well as buttons and labels for favorite, reply, and retweet counts.
+- [x] Compose and post a tweet from a Compose Tweet view, launched from a Compose button on the Nav bar.
+- [x] See Tweet details in a Details view
+- [ ] App should render consistently all views and subviews in recent iPhone models and all orientations
 
 The following **optional** features are implemented:
 
@@ -39,6 +38,15 @@ The following **optional** features are implemented:
 - [ ] \*User can switch between timeline, mentions, or profile view through a tab bar (**3 points**) I did implement a tab bar as seen in the 2nd gif below, but only the timeline tab is functional. 
 - [ ] Profile Page: pulling down the profile page should blur and resize the header image. (**4 points**)
 
+- [x] Be able to unlike or un-retweet by tapping a liked or retweeted Tweet button, respectively. (Doing so will decrement the count for each)
+- [x] Click on links that appear in Tweets
+- [ ] See embedded media in Tweets that contain images or videos
+- [x] Reply to any Tweet. Replies should be prefixed with the username. The reply_id should be set when posting the tweet
+- [x] See a character count when composing a Tweet (as well as a warning) (280 characters)
+- [x] Load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client
+- [ ] Click on a Profile image to reveal another user’s profile page, including: Header view: picture and tagline and Basic stats: #tweets, #following, #followers
+- [ ] Switch between timeline, mentions, or profile view through a tab bar
+- [ ] Profile Page: pulling down the profile page should blur and resize the header image.
 
 The following **additional** features are implemented:
 
