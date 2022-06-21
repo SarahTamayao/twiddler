@@ -69,7 +69,6 @@ Here's a walkthrough of implemented user stories. The gifs showcase, in order:
 ![twiddler_links](https://user-images.githubusercontent.com/43052066/124192877-fe835680-da93-11eb-8713-838aadb9c482.gif)
 ![twiddler_overload](https://user-images.githubusercontent.com/43052066/124192882-004d1a00-da94-11eb-878c-cb480dc9b09b.gif)
 
-![twiddler_autorotate](https://user-images.githubusercontent.com/43052066/124193956-b7966080-da95-11eb-8116-933121cd5585.gif)
 
 ## Notes
 
